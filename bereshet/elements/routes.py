@@ -5,7 +5,8 @@ from bereshet.elements import bp
 from bereshet.elements.forms import CreateMechaberForm
 from bereshet.elements.mechaber import Mechaber
 
-@bp.route('/create_mechaber', methods=['GET', 'POST'])
+
+@bp.route("/create_mechaber", methods=["GET", "POST"])
 def create_mechaber():
     form = CreateMechaberForm()
     if form.validate_on_submit():
@@ -13,5 +14,5 @@ def create_mechaber():
         db.session.add(mechaber)
         db.session.commit()
         flash('Added mechaber "{}"'.format(mechaber))
-        return redirect(url_for('main.create'))
-    return render_template('create.html', title='Create Mechaber', form=form)
+        return redirect(url_for("main.create"))
+    return render_template("create.html", title="Create Mechaber", form=form)
