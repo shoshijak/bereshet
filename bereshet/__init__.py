@@ -1,25 +1,28 @@
-import os, logging, rq
-from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import Flask, request, current_app
+"""Bereshet Application initialization and factory function."""
+
+import os
+import logging
+from logging.handlers import RotatingFileHandler
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 from config import Config
-from redis import Redis
 
-db = SQLAlchemy()
-migrate = Migrate()
-bootstrap = Bootstrap()
+DB = SQLAlchemy()
+MIGRATE = Migrate()
+BOOTSTRAP = Bootstrap()
 
 
 def create_reshet(config_class=Config):
+    """Bereshet application factory."""
     reshet = Flask(__name__)
     reshet.config.from_object(config_class)
 
     # Init modules
-    db.init_app(reshet)
-    migrate.init_app(reshet, db)
-    bootstrap.init_app(reshet)
+    DB.init_app(reshet)
+    MIGRATE.init_app(reshet, DB)
+    BOOTSTRAP.init_app(reshet)
 
     # Register blueprints
     from bereshet.errors import bp as errors_bp
@@ -62,3 +65,5 @@ def create_reshet(config_class=Config):
 
 
 from bereshet import elements
+
+__all__ = ["create_reshet", "elements"]

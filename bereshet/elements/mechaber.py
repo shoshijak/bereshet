@@ -1,19 +1,28 @@
-import os, json, redis, rq
-from datetime import datetime, timedelta
-from time import time
-from flask import current_app, url_for
-from bereshet import db
+"""Defines the functionalities of a Mechaber."""
+# from flask import current_app, url_for
+from bereshet import DB
 
 # from bereshet.models.element import Element, Name
 
 # enum mechaber_type = litvak, kabbalist, chassid, ...
 # enum mechaber_period = rishon, acharon ...
 
-# class Mechaber(Element):
-class Mechaber(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
-    mechabername = db.Column(db.String(64), index=True, unique=True)
+# class Mechaber(Element):
+class Mechaber(DB.Model):
+    """
+    Class Mechaber: represents authors of Jewish Literature.
+
+    Members:
+    X
+
+    Methods:
+    X
+
+    """
+
+    mechaber_id = DB.Column(DB.Integer, primary_key=True)
+    mechaber_name = DB.Column(DB.String(64), index=True, unique=True)
 
     # SQL table elements
     # name = Name(...)
@@ -36,7 +45,8 @@ class Mechaber(db.Model):
     #    return self.name.most_given_name
 
     def __repr__(self):
-        return "<Mechaber {}>".format(self.mechabername)
+        """Return a Mechaber's string representation."""
+        return "<Mechaber {}>".format(self.mechaber_name)
 
     # def to_dict(self):
     #    data = {
@@ -57,9 +67,12 @@ class Mechaber(db.Model):
     #    return data
 
     def to_dict(self):
-        data = {"id": self.id, "mechabername": self.mechabername}
+        """Return a Mechaber's dictionary representation."""
+        data = {"mechaber_id": self.id, "mechaber_name": self.mechaber_name}
         return data
 
     def from_dict(self, data):
+        """Initialize Mechaber instance from a dictionary."""
+        # assert present elements?
         for field in data:
             setattr(self, field, data[field])

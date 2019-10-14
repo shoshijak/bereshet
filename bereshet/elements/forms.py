@@ -1,20 +1,30 @@
+"""Defines Bereshet's forms."""
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Length
 from bereshet.elements.mechaber import Mechaber
 
+
 # class CreateMechaberForm(CreateElementForm):
 class CreateMechaberForm(FlaskForm):
-    mechabername = StringField(
+    """
+    Class CreateMechaberForm: f a form allowing to create a new 'Mechaber'.
+
+    Members:
+    x
+    """
+
+    mechaber_name = StringField(
         "Mechaber' given name", validators=[DataRequired(), Length(min=3, max=64)]
     )
     submit = SubmitField("Create a new Mechaber")
 
-    def validate_mechabername(self, mechabername):
-        # Do not use a mechabername which already exists
-        mechaber = Mechaber.query.filter_by(mechabername=mechabername.data).first()
+    def validate_mechaber_name(self, mechaber_name):
+        """Validate the name of a Mechaber before accpeting it into the Database."""
+        # Do not use a mechaber_name which already exists
+        mechaber = Mechaber.query.filter_by(mechaber_name=mechaber_name.data).first()
         if mechaber is not None:
-            raise ValidationError("This mechabername is already used")
+            raise ValidationError("This mechaber_name is already used")
         # TODO add more validation conditions
         # do not use a name that is among someone else is names
         # do not use a name which contains certain special characters
