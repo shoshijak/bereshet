@@ -4,7 +4,10 @@
 
 description
 
+![Bereshet Homepage Screenshot](docs/Screenshot-Homepage.png)
+
 ## Why this name?
+
 - reminds "Beresheet"
 - Network
 - Idea: something customizable, custom, but also hyper-connected, exploratory
@@ -42,6 +45,7 @@ instructions
 ### Adapt config
 
 ### Run app
+
 ```
 FLASK_APP=bereshet:create_reshet flask run
 ```
@@ -88,7 +92,7 @@ yam/
  |-docs/
  |-migrations/
  |---versions/
- ```
+```
 
 ### OOP structure
 
